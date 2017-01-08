@@ -4,7 +4,6 @@
   * NO WARRANTY of ANY KIND is provided. 
   */
 
-#ifndef MPU9250
 #define MPU9250
 
 
@@ -415,7 +414,7 @@ uint32_t mpu_read_magnetometer_test(uint8_t reg, uint8_t * registers, uint8_t le
 
 #endif
 
-#endif /* APP_MPU_H__ */
+//#endif /* APP_MPU_H__ */
 
 /**
   @}

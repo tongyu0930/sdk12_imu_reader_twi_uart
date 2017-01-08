@@ -16,6 +16,8 @@
  * and therefore I have added a conditional statement defining different pins
  * for each board. This is only for my own convenience. 
  */
+#define MPU9250
+
 #if defined(BOARD_PCA10040)
 #define MPU_TWI_SCL_PIN 3
 #define MPU_TWI_SDA_PIN 4
@@ -181,7 +183,6 @@ uint32_t nrf_drv_mpu_read_registers(uint8_t reg, uint8_t * p_data, uint32_t leng
 
 
 #if (defined(MPU9150) || defined(MPU9250)) && (TWI0_ENABLED || TWI1_ENABLED) // Magnetometer only works with TWI so check if TWI is enabled
-
 
 uint32_t nrf_drv_mpu_read_magnetometer_registers(uint8_t reg, uint8_t * p_data, uint32_t length)
 {

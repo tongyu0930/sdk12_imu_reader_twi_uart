@@ -42,7 +42,7 @@ uint32_t mpu_int_enable(mpu_int_enable_t *cfg)
 
 
 
-uint32_t mpu_init(void)
+uint32_t mpu_init(void) // 这个只是初始化acc和gyro
 {
     uint32_t err_code;
 	
@@ -66,17 +66,18 @@ uint32_t mpu_init(void)
 uint32_t mpu_read_accel(accel_values_t * accel_values)
 {
     uint32_t err_code;
-    uint8_t raw_values[6];
-    err_code = nrf_drv_mpu_read_registers(MPU_REG_ACCEL_XOUT_H, raw_values, 6);
+    uint8_t raw_values[6]; // 这个六位数组怎么就变成了有三个量的结构体？
+    err_code = nrf_drv_mpu_read_registers(MPU_REG_ACCEL_XOUT_H, raw_values, 6); //读6个register。一个register里有8bit。Registers 59 to 64 – Accelerometer Measurements
     if(err_code != NRF_SUCCESS) return err_code;
 
     // Reorganize read sensor values and put them into value struct
     uint8_t *data;
-    data = (uint8_t*)accel_values;
+    data = (uint8_t*)accel_values; // data是指向accel_value（这地方被强制转换类型了）的指针，给data赋值就是给accel_values赋值。
     for(uint8_t i = 0; i<6; i++)
     {
         *data = raw_values[5-i];
         data++;
+        //printf();
     }
     return NRF_SUCCESS;
 }
